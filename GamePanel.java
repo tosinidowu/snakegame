@@ -25,8 +25,7 @@ public class GamePanel extends JPanel implements ActionListener
   Random random;
   
   
-  GamePanel()
-  {
+  GamePanel(){
     random = new Random();
     this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     this.setBackground(Color.black);
@@ -34,20 +33,17 @@ public class GamePanel extends JPanel implements ActionListener
     this.addKeyListener(new MyKeyAdapter());
     startGame();
   }
-  public void startGame() 
-  {
+  public void startGame() {
     newApple();
     running = true;
     timer = new Timer(DELAY, this);
     timer.start();
   }
-  public void paintComponent(Graphics g) 
-  {
+  public void paintComponent(Graphics g) {
     super.paintComponent(g);
     draw(g);
   }
-  public void draw(Graphics g)
-  {
+  public void draw(Graphics g){
     g.setColor(Color.gray);
     if(running){
       /*
@@ -59,15 +55,12 @@ public class GamePanel extends JPanel implements ActionListener
       g.setColor(Color.red);
       g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
       
-      for(int i = 0; i < bodyParts; i++)
-      {
-        if(i == 0)
-        {
+      for(int i = 0; i < bodyParts; i++){
+        if(i == 0){
           g.setColor(Color.green);
           g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
         }
-        else
-        {
+        else{
           g.setColor(new Color(45,180,0));
           g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
           g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
@@ -83,14 +76,11 @@ public class GamePanel extends JPanel implements ActionListener
       gameOver(g);
     }
   }
-  public void newApple()
-  {
+  public void newApple(){
     appleX = random.nextInt((int)SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
-    appleY = random.nextInt((int)SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
-  
+    appleY = random.nextInt((int)SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE; 
   }
-  public void move()
-  {
+  public void move(){
     for(int i = bodyParts; i > 0; i--){
       x[i] = x[i-1];
       y[i] = y[i-1];    
@@ -108,8 +98,7 @@ public class GamePanel extends JPanel implements ActionListener
         break;
       case 'R':
         x[0] = x[0] + UNIT_SIZE;
-        break;    
-        
+        break;          
     }
     
     
@@ -120,7 +109,7 @@ public class GamePanel extends JPanel implements ActionListener
       applesEaten++;
       newApple();
     }   
-    }
+   }
   
   public void checkCollisions(){ 
     // checks if head collides with body
@@ -165,8 +154,7 @@ public class GamePanel extends JPanel implements ActionListener
     
   }
   @Override
-  public void actionPerformed(ActionEvent e) 
-  {
+  public void actionPerformed(ActionEvent e){
     if(running)
     {
       move();
